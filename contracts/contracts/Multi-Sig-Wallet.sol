@@ -2,6 +2,10 @@
 
 pragma solidity ^0.8.13;
 
+interface accessRegistry{
+    function getSigners() external view returns(address[] memory);
+}
+
 contract MultiSigWallet{
     event approve(address indexed owner,uint txId);
     event deposit(address indexed sender,uint value,uint balance);
@@ -41,17 +45,9 @@ contract MultiSigWallet{
     Tx[] public Transactions;
     mapping(uint=>mapping(address=>bool)) public isApproved;
 
-    function createWallet(address[] memory _owners,uint _requiredVotes) external{
-        require(_owners.length>0,"wallet must have owners");
-        require(_requiredVotes>0 && requiredVotes<_owners.length,"Invalid number of Votes");
-        for(uint i=0;i<_owners.length;i++){
-            address owner=_owners[i];
-            require(owner!=address(0),'address is invalid');
-            require(!isOwner[owner],'addresses must be unique');
-            isOwner[owner]=true;
-            owners.push(owner);
-        }
-        requiredVotes=_requiredVotes;
+    constructor() {
+        owners=accessRegistry(0x5FbDB2315678afecb367f032d93F642f64180aa3).getSigners();
+        requiredVotes=3;
     }
 
     receive() payable external {
