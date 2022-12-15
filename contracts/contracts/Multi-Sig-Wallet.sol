@@ -1,10 +1,7 @@
 //SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.13;
-
-interface accessRegistry{
-    function getSigners() external view returns(address[] memory);
-}
+import "./IAccessReg.sol";
 
 contract MultiSigWallet{
     event approve(address indexed owner,uint txId);
@@ -45,9 +42,15 @@ contract MultiSigWallet{
     Tx[] public Transactions;
     mapping(uint=>mapping(address=>bool)) public isApproved;
 
+    IAccessReg accessReg;
     constructor() {
-        owners=accessRegistry(0x5FbDB2315678afecb367f032d93F642f64180aa3).getSigners();
+        address regContract=0x5FbDB2315678afecb367f032d93F642f64180aa3;
+        accessReg=IAccessReg(regContract);
         requiredVotes=3;
+    }
+
+    function intializeOwners() public {
+        owners=accessReg.getSigners();
     }
 
     receive() payable external {
