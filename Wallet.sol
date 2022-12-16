@@ -10,8 +10,8 @@ contract MultiSigWallet{
     event revokeTx(address indexed owner, uint indexed txId);
     event executeTx(uint indexed txId);
     uint requiredVotes;
-    address[] public owners;
-    mapping(address=>bool) public isOwner;
+    address[] owners;
+    mapping(address=>bool)  isOwner;
     struct Tx{
         address to;
         uint value;
@@ -44,13 +44,21 @@ contract MultiSigWallet{
 
     IAccessReg accessReg;
     constructor() {
-        address regContract=0x5FbDB2315678afecb367f032d93F642f64180aa3;
+        address regContract=0xf8b0EbD0D438B00C05F431128FB0bD9a625AA7cb;
         accessReg=IAccessReg(regContract);
-        requiredVotes=3;
     }
 
     function intializeOwners() public {
-        owners=accessReg.getSigners();
+        owners=accessReg.getAllsigners();
+        for(uint i=0;i<owners.length;i++){
+            isOwner[owners[i]]=true;
+        }
+        uint x=owners.length*3;
+        uint y=x/5;
+        if(x%5>0){
+            y+=1;
+        }
+        requiredVotes=y;
     }
 
     receive() payable external {
@@ -95,9 +103,9 @@ contract MultiSigWallet{
 
     function revokeTransaction(uint _txId)public 
     onlyOwner()
-    notApproved(_txId)
     txNotExecuted(_txId)
-    notApproved(_txId){
+    txExists(_txId)
+    {
         Tx storage transaction=Transactions[_txId];
         transaction.numOfVotes-=1;
         isApproved[_txId][msg.sender]=false;
@@ -113,6 +121,6 @@ contract MultiSigWallet{
     }
 
     function getTransactions() external view returns(uint ){
-        return Transactions.length;
+        return Transactions.length-1;
     }
 }

@@ -73,7 +73,7 @@ contract AccessRegistry{
         blackListedSigners.pop();
     }
 
-    function getAllsigners() public view returns(address[] memory) 
+    function getAllsigners() external view returns(address[] memory) 
     {
         return(signers);
     }
