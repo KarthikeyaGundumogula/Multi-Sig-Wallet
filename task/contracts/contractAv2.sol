@@ -12,7 +12,7 @@ contract contractAv2{
     }
 
     modifier onlyOwner() {
-        require(msg.sender==admin,"not the owner");
+        require(tx.origin==admin,"not the owner");
         _;
     }
 
@@ -32,6 +32,9 @@ contract contractAv2{
         I1=inputs(a,0);
     }
 
+    function getOwner() public view returns(address){
+        return admin;
+    }
 
     function setA(uint ipA,uint ipB) public onlyOwner() noReentrancy(){
         I1.ip1+=ipA;

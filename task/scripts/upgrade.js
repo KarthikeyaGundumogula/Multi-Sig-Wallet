@@ -4,7 +4,7 @@ async function main() {
   const ContractAv2 = await ethers.getContractFactory("contractAv2");
   console.log("Upgrading contract...");
   await upgrades.upgradeProxy(
-    "0xC0E2f6b2A4b75ec42A3CE56C498B3e8cbB476dBa",
+    "0xD9dB318878Ed9f8062F4A0A894393636E3549946",
     ContractAv2
   );
   console.log("Contract Upgraded");

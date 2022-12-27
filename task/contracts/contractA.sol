@@ -12,7 +12,7 @@ contract contractA{
     }
 
     modifier onlyOwner() {
-        require(msg.sender==admin,"not the owner");
+        require(tx.origin==admin,"not the owner");
         _;
     }
 
@@ -29,5 +29,9 @@ contract contractA{
 
     function getA() public view returns(uint ){
         return a;
+    }
+
+    function getOwner() public view returns(address ){
+        return admin;
     }
 }
