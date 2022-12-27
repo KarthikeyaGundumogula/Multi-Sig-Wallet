@@ -1,0 +1,112 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xef7F56DF933bC0aF5a488AAaBCA93A3855711EaA",
+    "txHash": "0x188927b52b10b6edccd509faab26bb048de311bc9f3623f8095227ab31b42963"
+  },
+  "proxies": [
+    {
+      "address": "0xbE9dE4D39C8c5dc6250f58c0fdEFf6c50015F588",
+      "txHash": "0x87b5e37933337519969913189dd2f98c58e5687b0f1f4a7160aeafd96fbd1f5c",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "12c28f2e09c8e53c2885b28f8cc54219e4259dd7f3f812172e5affd7a5bb64fb": {
+      "address": "0x71745f32F2F626Bb98d261e42571A1Af5558863b",
+      "txHash": "0xe31a775edaa726f23803170fa550ea7ab17fb6c34ee64e95448c01eca6485d45",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "label": "a",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "contractA",
+            "src": "contracts/contractA.sol:8"
+          },
+          {
+            "label": "aIsSet",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "contractA",
+            "src": "contracts/contractA.sol:9"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    },
+    "ee0a22eed9155fe1a725c81f3315214e9e5cf4d4771c4ed2e9b792dc2e009a3b": {
+      "address": "0xEcFDda19E0059b0A23339529fA38825C329fd855",
+      "txHash": "0xe276ae8e098b09bd546ae199fdb04fbe6342ae765486e7750f065c26ccd9111e",
+      "layout": {
+        "solcVersion": "0.8.17",
+        "storage": [
+          {
+            "label": "a",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "contractAv2",
+            "src": "contracts/contractAv2.sol:6"
+          },
+          {
+            "label": "aIsSet",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "contractAv2",
+            "src": "contracts/contractAv2.sol:7"
+          },
+          {
+            "label": "iA",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_struct(inputsA)69_storage",
+            "contract": "contractAv2",
+            "src": "contracts/contractAv2.sol:16"
+          }
+        ],
+        "types": {
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(inputsA)69_storage": {
+            "label": "struct contractAv2.inputsA",
+            "members": [
+              {
+                "label": "ipA",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "ipB",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              }
+            ],
+            "numberOfBytes": "64"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          }
+        }
+      }
+    }
+  }
+}
