@@ -12,7 +12,7 @@ contract contractA{
     }
 
     modifier onlyOwner() {
-        require(tx.origin==admin,"not the owner");
+        require(msg.sender==admin,"not the owner");
         _;
     }
 
