@@ -1,18 +1,23 @@
 const { expect } = require("chai");
 const { ethers, upgrades } = require("hardhat");
-const { loadFixtures } = require("@nomicfoundation/hardhat-network-helpers");
+const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
 
 describe("testing v2", function () {
   async function contractFixture() {
     const contractFactory = await ethers.getContractFactory("contractA");
     const [owner] = await ethers.getSigners();
-    const contract = await upgrades.deployProxy(contractFactory, [owner], {
-      initializer: "initializer",
-    });
+    const contractv1 = await upgrades.deployProxy(
+      contractFactory,
+      [owner.address],
+      {
+        initializer: "initializer",
+      }
+    );
+    const contractAv2Factory = await ethers.getContractFactory("contractAv2");
+    await upgrades.upgradeProxy(contractv1.address, contractAv2);
     return contract;
   }
   it("test for struct initialzation..", async function () {
-    const contract = await loadFixtures(contractFixture);
-    console.log(await contract.getA());
+    const contract = await loadFixture(contractFixture);
   });
 });
